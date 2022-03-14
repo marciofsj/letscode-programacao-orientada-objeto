@@ -1,4 +1,4 @@
-function Conta(agencia=0, numero=0, digito=0, saldo=0, titular=null, tipo="CC", historico=[]) {
+function Conta(agencia=0, numero=0, digito=0, saldo=0, titular=null, tipo="CC", lancamentos=[]) {
     // propriedades
     this.agencia = agencia;
     this.numero = numero;
@@ -6,7 +6,7 @@ function Conta(agencia=0, numero=0, digito=0, saldo=0, titular=null, tipo="CC", 
     this.saldo = saldo;
     this.titular = titular;
     this.tipo = tipo;
-    this.historico = [`Saldo: R$${saldo}`];
+    this.lancamentos = [`Saldo: R$${saldo}`];
     // métodos (adicionar ao corpo do construtor == má prática)
     /*
     this.sacar = function() {};
@@ -23,14 +23,14 @@ function Conta(agencia=0, numero=0, digito=0, saldo=0, titular=null, tipo="CC", 
   
   Conta.prototype.depositar = function(valor) {
         this.saldo += valor;
-        this.historico.push(`+R$${valor} = R$${this.saldo}`)
+        this.lancamentos.push(`+R$${valor} = R$${this.saldo}`);
         return this.saldo
   }
   
   Conta.prototype.sacar = function(valor) {
     if (this.saldo >= valor) {
         this.saldo -= valor;
-        this.historico.push(`-R$${valor} =  R$${this.saldo}`)
+        this.lancamentos.push(`-R$${valor} =  R$${this.saldo}`);
         return this.saldo
     }
     return "Saldo Insuficiente!";
@@ -43,7 +43,7 @@ function Conta(agencia=0, numero=0, digito=0, saldo=0, titular=null, tipo="CC", 
   }
 
   Conta.prototype.extrato = function() {
-      return this.historico
+      return this.lancamentos;
   }
   
   const contaJoao = new Conta(336, 1234, 0, 1500, "João");
